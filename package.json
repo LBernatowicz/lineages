@@ -4,25 +4,32 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start-react": "vite",
+    "start-react": "bun run vite",
     "start-electron": "cross-env NODE_ENV=development nodemon --watch electron --ext js,cjs --exec \"electron ./electron/main.cjs\"",
-    "dev": "concurrently \"bun run start-react\" \"bun run start-electron\""
+    "dev": "concurrently \"bun run start-react\" \"bun run start-electron\"",
+    "build": "bun run vite build",
+    "preview": "bun run vite preview"
   },
   "dependencies": {
+    "@radix-ui/colors": "^3.0.0",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-tooltip": "^1.2.8",
     "bun-plugin-tailwind": "^0.0.15",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^5.0.4",
+    "autoprefixer": "^10.4.21",
     "concurrently": "^9.2.1",
     "cross-env": "^10.1.0",
     "electron": "^38.2.0",
     "nodemon": "^3.1.10",
+    "postcss": "^8.5.6",
     "vite": "^7.1.7"
   }
 }
