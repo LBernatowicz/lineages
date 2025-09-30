@@ -1,41 +1,44 @@
-import React from "react";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import { ThemeSelector } from "./components/ThemeSelector";
-import { ColorPaletteDemo } from "./components/ColorPaletteDemo";
-import { ComponentShowcase } from "./components/ComponentShowcase";
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./components/ThemeToggle/ThemeToggle";
+import { TopBar } from "./components/TopBar/TopBar";
+import { NavMenu } from "./components/NavMenu/NavMenu";
+import { TreePage } from "./pages/TreePage";
+import { NotesPage } from "./pages/NotesPage";
+import { SettingsPage } from "./pages/SettingsPage";
 
 export default function App() {
+  const [isNavCollapsed, setIsNavCollapsed] = useState(false);
+
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900 transition-colors duration-300">
-        <div className="container mx-auto px-4 py-8">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <h1 className="text-4xl font-bold text-secondary-900 dark:text-white mb-2">
-                System Palet Kolorów
-              </h1>
-              <p className="text-secondary-600 dark:text-secondary-400">
-                Demonstracja różnych palet kolorów w aplikacji React + Tailwind CSS
-              </p>
-            </div>
-            <ThemeSelector />
-          </div>
-
-          {/* Main content */}
-          <div className="space-y-12">
-            <ColorPaletteDemo />
-            <ComponentShowcase />
-          </div>
-
-          {/* Footer */}
-          <div className="mt-16 pt-8 border-t border-secondary-200 dark:border-secondary-700">
-            <div className="text-center text-secondary-500 dark:text-secondary-400">
-              <p>Przełączaj palety kolorów używając selektora w prawym górnym rogu</p>
-            </div>
+      <BrowserRouter>
+        <div 
+          className="min-h-screen transition-colors duration-300"
+          style={{
+            backgroundColor: 'var(--sand-2)',
+          }}
+        >
+          <TopBar />
+          <NavMenu onCollapseChange={setIsNavCollapsed} />
+          
+          {/* Main content area - adjusted for NavMenu */}
+          <div 
+            className="transition-all duration-300" 
+            style={{ 
+              minHeight: 'calc(100vh - 36px)',
+              marginLeft: isNavCollapsed ? '60px' : '240px',
+              paddingTop: '36px', // TopBar height
+            }}
+          >
+            <Routes>
+              <Route path="/" element={<TreePage />} />
+              <Route path="/notes" element={<NotesPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
+            </Routes>
           </div>
         </div>
-      </div>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

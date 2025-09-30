@@ -1,4 +1,24 @@
-@import "tailwindcss";
+/* Import Radix Colors - Autumn Theme (Jesienny) */
+@import '@radix-ui/colors/amber.css';
+@import '@radix-ui/colors/orange.css';
+@import '@radix-ui/colors/brown.css';
+@import '@radix-ui/colors/bronze.css';
+@import '@radix-ui/colors/gold.css';
+@import '@radix-ui/colors/yellow.css';
+@import '@radix-ui/colors/sand.css';
+
+/* Dark mode colors */
+@import '@radix-ui/colors/amber-dark.css';
+@import '@radix-ui/colors/orange-dark.css';
+@import '@radix-ui/colors/brown-dark.css';
+@import '@radix-ui/colors/bronze-dark.css';
+@import '@radix-ui/colors/gold-dark.css';
+@import '@radix-ui/colors/yellow-dark.css';
+@import '@radix-ui/colors/sand-dark.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   :root {
@@ -89,22 +109,34 @@
   }
 
   :root {
-    @apply text-secondary-900 bg-secondary-50 font-sans;
+    color: #0f172a;
+    background-color: #f8fafc;
+    font-family: Inter, system-ui, sans-serif;
   }
 
   body {
-    @apply grid place-items-center min-w-[320px] min-h-screen relative m-0;
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #root {
+    width: 100%;
+    min-height: 100vh;
   }
 
   /* Dark mode support */
   @media (prefers-color-scheme: dark) {
     :root {
-      @apply text-secondary-100 bg-secondary-900;
+      color: #f1f5f9;
+      background-color: #0f172a;
     }
   }
 }
 
-body::before {
+/* Background pattern disabled for better UI clarity */
+/* body::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -115,7 +147,7 @@ body::before {
   transform: rotate(-12deg) scale(1.35);
   animation: slide 30s linear infinite;
   pointer-events: none;
-}
+} */
 
 @keyframes slide {
   from {
@@ -132,6 +164,28 @@ body::before {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-collapsible-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
   }
 }
 
