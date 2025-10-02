@@ -8,7 +8,10 @@ import { NotesPage } from "./pages/NotesPage";
 import { SettingsPage } from "./pages/SettingsPage";
 
 export default function App() {
-  const [isNavCollapsed, setIsNavCollapsed] = useState(false);
+  const [isNavCollapsed, setIsNavCollapsed] = useState(() => {
+    const saved = localStorage.getItem('navMenuCollapsed');
+    return saved ? JSON.parse(saved) : false;
+  });
 
   return (
     <ThemeProvider>
@@ -19,7 +22,7 @@ export default function App() {
             backgroundColor: 'var(--sand-2)',
           }}
         >
-          <TopBar />
+          <TopBar isNavCollapsed={isNavCollapsed} />
           <NavMenu onCollapseChange={setIsNavCollapsed} />
           
           {/* Main content area - adjusted for NavMenu */}

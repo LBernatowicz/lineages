@@ -1,8 +1,13 @@
 import React from 'react';
 import { useTheme } from '../ThemeToggle/ThemeToggle';
 import { SunIcon, MoonIcon } from '@radix-ui/react-icons';
+import { WorkspaceSelector } from './components/WorkspaceSelector';
 
-export const TopBar: React.FC = () => {
+interface TopBarProps {
+  isNavCollapsed: boolean;
+}
+
+export const TopBar: React.FC<TopBarProps> = ({ isNavCollapsed }) => {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -17,8 +22,11 @@ export const TopBar: React.FC = () => {
     >
       {/* Left side - App name (na środku przycisków systemowych) */}
       <div 
-        className="flex items-center gap-2 ml-16"
-        style={{ WebkitAppRegion: 'no-drag' }}
+        className="flex items-center gap-2 transition-all duration-300"
+        style={{ 
+          WebkitAppRegion: 'no-drag',
+          marginLeft: isNavCollapsed ? '60px' : '240px'
+        }}
       >
         <h1 
           className="text-sm font-bold"
@@ -29,16 +37,7 @@ export const TopBar: React.FC = () => {
         >
           Lineages
         </h1>
-        <div 
-          className="px-2 py-0.5 rounded text-xs font-medium"
-          style={{
-            backgroundColor: 'var(--brown-4)',
-            color: 'var(--brown-11)',
-            fontSize: '10px',
-          }}
-        >
-          Drzewo Genealogiczne
-        </div>
+        <WorkspaceSelector />
       </div>
 
       {/* Right side - Theme toggle switch */}

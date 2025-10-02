@@ -17,7 +17,7 @@ export const TreeWorkspace: React.FC = () => {
       <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <pattern id="dotPattern" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
-            <circle cx="15" cy="15" r="1.5" fill="#f59e0b" />
+            <circle cx="15" cy="15" r="1.5" fill="var(--workspace-dot-color)" />
           </pattern>
         </defs>
       </svg>
@@ -59,7 +59,7 @@ export const TreeWorkspace: React.FC = () => {
                     left: 0,
                   }}
                 >
-                  <rect width="10000" height="10000" fill="#fef9e7" />
+                  <rect width="10000" height="10000" fill="var(--workspace-bg)" />
                   <rect width="10000" height="10000" fill="url(#dotPattern)" />
                 </svg>
 

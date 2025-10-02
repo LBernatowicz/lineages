@@ -22,11 +22,15 @@ interface NavMenuProps {
 export const NavMenu: React.FC<NavMenuProps> = ({ onCollapseChange }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    const saved = localStorage.getItem('navMenuCollapsed');
+    return saved ? JSON.parse(saved) : false;
+  });
 
   const handleToggleCollapse = () => {
     const newCollapsedState = !isCollapsed;
     setIsCollapsed(newCollapsedState);
+    localStorage.setItem('navMenuCollapsed', JSON.stringify(newCollapsedState));
     onCollapseChange?.(newCollapsedState);
   };
 
